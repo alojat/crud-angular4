@@ -1,0 +1,2 @@
+.item-opciones{display: none}
+.item-descripcion:hover > .item-opciones{display: block; float: right;}

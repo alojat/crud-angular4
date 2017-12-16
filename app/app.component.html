@@ -1,0 +1,22 @@
+<ng2-slim-loading-bar [height]="'3px'">
+  <!--
+    You can use the following properties to customize the SlimLoadingBar via instance of SlimLoadingBarService:
+    [color] - The color of loading bar.
+    [height] - The height of loading bar.
+    [visible] - The flag helps hide and show the loading bar.
+    You can use the following methods to control the SlimLoadingBar via instance of SlimLoadingBarService:
+
+    start - Start the loading progress. Use the callback function as an parameter to listed the complete event.
+    stop - Stop the loading progress. This method pause the current position of loading progress.
+    reset- Reset the position of loading progress to 0.
+    complete - Set the progress to 100% and hide the progress bar.
+  -->
+</ng2-slim-loading-bar> 
+<div class="wrapper">
+  <h3>Mantenimiento de Productos</h3>
+  <hr>
+  <a routerLink="listado">LISTADO</a>
+  <a routerLink="formulario">REGISTRO</a>
+
+  <router-outlet></router-outlet>
+</div>

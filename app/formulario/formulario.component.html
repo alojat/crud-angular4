@@ -1,0 +1,100 @@
+<p>
+  ESTAMOS EN LA VISTA FORMULARIO
+</p>
+{{name.length}}
+<form (ngSubmit)="guardar()">
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class='form-group'>
+        <label for='item.pro_descripcion'>DESCRIPCION:</label>
+        <input name="name"  type='text' required [(ngModel)]='item.pro_descripcion' 
+          class='form-control' placeholder='DESCRIPCION' #name="ngModel" required minlength="4">
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger" style="margin-top:5px;">
+          <div *ngIf="name.errors.required">
+            La descripcion es requerida!
+          </div>
+          <div *ngIf="name.errors.minlength">
+            La descripcion debe tener minimo 4 caracteres
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class='form-group'>
+        <label for='item.pro_marca'>UNIDAD:</label>
+        <select required [(ngModel)]='item.pro_unidad' class='form-control' placeholder="Unidades" [ngModelOptions]="{standalone: true}" #unidad="ngModel">
+          <option value="" selected>SELECCIONE UNIDAD</option>
+          <option *ngFor="let unidad of unidades" [value]="unidad.id">{{unidad.nombre}}</option>
+        </select>
+        <div *ngIf="unidad.invalid && (unidad.dirty || unidad.touched)" class="alert alert-danger" style="margin-top:5px;">
+          <div *ngIf="unidad.errors.required">
+            La unidad es requerida!
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class='form-group'>
+        <label for='item.pro_descripcion'>MARCA:</label>
+        <input name="marca"  type='text' required [(ngModel)]='item.pro_marca' class='form-control' placeholder='MARCA' #marca="ngModel" minlength="4">
+        <div *ngIf="marca.invalid && (marca.dirty || marca.touched)" class="alert alert-danger" style="margin-top:5px;">
+          <div *ngIf="marca.errors.required">
+            La unidad no es requerida!
+          </div>
+          <div *ngIf="marca.errors.minlength">
+            La marca debe tener minimo 4 caracteres
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class='form-group'>
+        <label for=''>PRECIO DE COMPRA</label>
+        <input name='pcompra' type='number' required [(ngModel)]='item.pro_pcompra' class='form-control' placeholder='PRECIO DE COMPRA' #pcompra='ngModel' required min="0">
+        <div *ngIf='pcompra.invalid && (pcompra.dirty || pcompra.touched)' class='alert alert-danger' style="margin-top:5px;">
+          <div *ngIf='pcompra.errors.required'>
+            Este campo es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class='form-group'>
+        <label for=''>PRECIO DE VENTA</label>
+        <input name='pventa' type='number' required [(ngModel)]='item.pro_pventa' class='form-control' placeholder='PRECIO DE VENTA' #pventa='ngModel' required min='0'>
+        <div *ngIf='pventa.invalid && (pventa.dirty || pventa.touched)' class='alert alert-danger' style="margin-top:5px;">
+          <div *ngIf='pventa.errors.required'>
+            Este campo es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class='form-group'>
+        <label for=''>FECHA DE COMPRA</label>
+        <my-date-picker name="mydate" [options]="myDatePickerOptions" [(ngModel)]='item.pro_fcompra' #fcompra='ngModel' required></my-date-picker>
+        <div *ngIf='fcompra.invalid' class='alert alert-danger' style='margin-top:5px;'>
+          <div *ngIf='fcompra.errors.required'>
+            Este campo es requerido
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class='form-group'>
+        <label for=''>OBSERVACIONES</label>
+        <input name='observaciones' type='text' required [(ngModel)]='item.pro_observaciones' class='form-control' placeholder='OBSERVACIONES'>
+      </div>
+    </div>
+  </div>
+  
+  <button type="submit" [disabled]="name.invalid || unidad.invalid || marca.invalid || fcompra.invalid || pcompra.invalid || pventa.invalid" class="btn btn-success btn-xs">GUARDAR</button>
+  <a routerLink="/listado" class="btn btn-danger btn-xs">GUARDAR</a>
+</form>

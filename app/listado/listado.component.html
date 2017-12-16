@@ -1,0 +1,59 @@
+<h4>LISTADO DE MIS PRODUCTOS</h4>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>DESCRIPCION</th>
+      <th width="15%">FECHA</th>
+      <th width="15%">P. COMPRA</th>
+      <th width="15%">P. VENTA</th>
+    </tr>
+    <tr>
+      <th>
+        <input type="text" class="form-control" [(ngModel)]="filterargs" placeholder="Descripcion">
+      </th>
+      <th></th>
+      <th>
+        <input type="number" class="form-control" [(ngModel)]="pcompra" placeholder="Precio Compra">
+      </th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listado | filtroProductos:'pro_pcompra':pcompra | filtroProductos:'pro_descripcion':filterargs">
+      <td class="item-descripcion">
+        {{item.pro_descripcion | uppercase}}
+        <span class="item-opciones">
+          <a [routerLink]="['/detalles', item.idproducto, 5]" class="btn btn-primary btn-xs"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+          <button class="btn btn-danger btn-xs" (click)="confirmacion(item)" data-toggle="modal" data-target=".bs-example-modal-sm"><i class="glyphicon glyphicon-erase"></i> Eliminar</button>
+        </span>
+      </td>
+      <td align="center">
+        {{item.pro_fcompra | date:'dd/MM/yyyy'}}
+      </td>
+      <td align="center">
+        {{item.pro_pcompra | moneda:'2'}}
+      </td>
+      <td align="center">
+        {{item.pro_pventa | moneda:'2'}}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">CONFIRMACION</h4>
+      </div>
+      <div class="modal-body">
+        DESEAS ELIMINAR EL REGISTRO?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Ahora no Jóven</button>
+        <button type="button" class="btn btn-danger" (click)="borrar()" data-dismiss="modal">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>
